@@ -15,7 +15,7 @@ library(GGally)
 library(skimr)
 ```
 
-## Exploratory Data Visualization 
+## Exploratory Data Visualization
 
 Check out your data a bit:
 
@@ -34,4 +34,38 @@ head(penguins)
 
 # Show me the last six lines!
 tail(penguins)
+```
+
+```{r}
+skim(penguins) # SO COOL BASIC SUMMARY STATS!
+```
+
+```{r}
+
+# GGally::ggpairs(penguins)
+```
+
+## Jitterplot
+
+Flipper length by species
+
+```{r}
+
+#| fig.cap: "Figure caption :) "
+ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) + 
+  geom_jitter(width = 0.2,
+              alpha = 0.5,
+              aes(color = species)) + 
+  geom_boxplot(fill = NA) +
+  theme_minimal() + 
+  scale_color_manual(values = c("darkorchid4","cyan4","goldenrod")) + 
+  labs( x = "Penguin Species",
+        y = "Flipper Length (mm)",
+        title = "Palmer Archipelago Penguin Flippers")
+```
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm)) + 
+  geom_histogram(aes(color = species, fill = species)) + 
+  facet_wrap(~species, ncol = 1) # wrap in single column
 ```
